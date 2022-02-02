@@ -1,5 +1,6 @@
 //import java.net.*;
 import java.io.*;
+
 import tcpclient.TCPClient;
 
 public class TCPAsk {
@@ -24,7 +25,6 @@ public class TCPAsk {
             int argindex = 0;
             hostname = args[argindex++];
             port = Integer.parseInt(args[argindex++]);
-
             // Remaining arguments, if any, are string to send to server
             if (argindex < args.length) {
                 // Collect remaining arguments into a string with single space as separator
@@ -39,6 +39,7 @@ public class TCPAsk {
                 }
                 builder.append("\n");
                 userInputBytes = builder.toString().getBytes();
+                System.out.println(userInputBytes);
             }
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException ex) {
             // Exceeded array while parsing command line, or could
