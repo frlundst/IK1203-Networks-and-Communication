@@ -17,18 +17,19 @@ public class TCPClient {
      * @throws IOException
      */
     public byte[] askServer(String hostname, int port, byte [] toServerBytes) throws IOException {
-        try (Socket clientSocket = new Socket(hostname, port)) {
-            byte buffer[] = new byte[1024];
-            OutputStream outputStream = clientSocket.getOutputStream();
-            InputStream inputStream = clientSocket.getInputStream();
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        Socket clientSocket = new Socket(hostname, port);
+        byte buffer[] = new byte[1024];
+        OutputStream outputStream = clientSocket.getOutputStream();
+        InputStream inputStream = clientSocket.getInputStream();
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-            outputStream.write(toServerBytes);
-        
-            byteArrayOutputStream.write(buffer, 0, inputStream.read(buffer));
-            
-            clientSocket.close();
-            return byteArrayOutputStream.toByteArray();
+        outputStream.write(toServerBytes);
+
+        for(int i = inputStream.read(buffer); i != -1; i = inputStream.read(buffer)){
+            byteArrayOutputStream.write(buffer, 0, i);
         }
+
+        clientSocket.close();
+        return byteArrayOutputStream.toByteArray();
     }
 }
