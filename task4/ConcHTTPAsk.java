@@ -4,16 +4,15 @@ import myrunnable.MyRunnable;
 
 //http://localhost:8888/ask?hostname=time.nist.gov&limit=1200&port=13
 
-public class HTTPAsk {
+public class ConcHTTPAsk {
     public static void main(String[] args) throws InterruptedException {
         int port = Integer.parseInt(args[0]);
 
         try{
             ServerSocket serverSocket = new ServerSocket(port); 
-            serverSocket.setReuseAddress(true);
             while(true){
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("New connection, starting new thread...");
+                //System.out.println("New connection, starting new thread...");
                 MyRunnable myRunnable = new MyRunnable(clientSocket);
                 myRunnable.start();
             }

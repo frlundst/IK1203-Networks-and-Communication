@@ -1,5 +1,4 @@
 package myrunnable;
-import java.util.concurrent.TimeUnit;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.io.*;
@@ -106,8 +105,6 @@ public class MyRunnable extends Thread {
                     STATUS = "HTTP/1.1 400 Bad Request";
                     throw new Exception("HTTP/1.1 400 Bad Request");
                 }
-
-                TimeUnit.SECONDS.sleep(10);
 
                 try {
                     TCPClient tcpClient = new tcpclient.TCPClient(requestShutdown, requestTimeout, requestLimit);
